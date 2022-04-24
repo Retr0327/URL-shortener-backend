@@ -3,6 +3,6 @@ import { handleCreateShortURL } from "../controllers";
 
 const router = new KoaRouter();
 
-router.post('/url', handleCreateShortURL);
+router.post("/url", handleCreateShortURL);
 
 export { router as urlRoute };
