@@ -1,0 +1,30 @@
+{
+  "name": "url-shortener-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "test": "npx kill-port 3000 && node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --forceExit",
+    "start": "npx kill-port 3000 && nodemon -L --config nodemon.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.3.0",
+    "@koa/router": "^10.1.1",
+    "koa": "^2.13.4",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/koa": "^2.13.4",
+    "@types/koa__cors": "^3.3.0",
+    "@types/koa__router": "^8.0.11",
+    "@types/node": "^17.0.25",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}
