@@ -1,4 +1,4 @@
 import { rootRoute } from "./root";
+import { urlRoute } from "./url";
 
-export { rootRoute };
-    
+export { rootRoute, urlRoute };
