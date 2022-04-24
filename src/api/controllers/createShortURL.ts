@@ -1,7 +1,8 @@
 import { Context } from "koa";
 
 const handleCreateShortURL = async (ctx: Context) => {
-  console.log(ctx);
+  ctx.status = 201;
+  ctx.body = { status: "success" };
 };
 
 export default handleCreateShortURL;
