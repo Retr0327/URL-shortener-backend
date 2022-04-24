@@ -10,7 +10,7 @@ const pgConfig = (): PoolConfig => {
       user: pgUser,
       database: pgDatabase,
       password: pgPassword,
-      port: pgPort,
+      port: Number(pgPort),
     };
   }
 
@@ -20,6 +20,7 @@ const pgConfig = (): PoolConfig => {
     port: 5432,
   };
 };
-const config = pgConfig();
 
-const URLSHORTENER = new PG.Pool();
+const URLSHORTENER = new PG.Pool(pgConfig());
+
+export default URLSHORTENER
