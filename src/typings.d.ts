@@ -1,11 +1,11 @@
 export type DockerEnvType = {
-  pgUser: string;
-  pgHost: string;
-  pgDatabase: string;
-  pgPassword: string;
-  pgPort: number;
-  redisHost: string;
-  redisPort: number;
-  port: number;
-  period: string;
+  pgUser: string | undefined;
+  pgHost: string | undefined;
+  pgDatabase: string | undefined;
+  pgPassword: string | undefined;
+  pgPort: number | undefined;
+  redisHost: string | undefined;
+  redisPort: number | undefined;
+  port: number | undefined;
+  period: string | undefined;
 };
