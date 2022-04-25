@@ -10,9 +10,8 @@ function makeShortURL(length: number) {
   return result;
 }
 
-async function generateShortUrl(length: number) {
+function generateShortUrl(length: number) {
   const shortURL = makeShortURL(length);
-
   return shortURL;
 }
 
