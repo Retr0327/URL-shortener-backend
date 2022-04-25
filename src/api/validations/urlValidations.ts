@@ -19,7 +19,7 @@ const validateURL = async (ctx: Context, next: Next) => {
     return;
   }
 
-  next();
+  await next();
 };
 
 export default validateURL;
