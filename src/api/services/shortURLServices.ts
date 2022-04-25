@@ -11,9 +11,9 @@ async function createShortUrlByUrl(
         full_url, 
         short_url, 
         expire)
-     VALUES ($1, $2, $3)
-     RETURNING id, short_url
-    `,
+      VALUES ($1, $2, $3)
+      RETURNING id, short_url
+      `,
       [url, shortUrl, expire]
     );
 
@@ -26,7 +26,7 @@ async function createShortUrlByUrl(
 async function deleteShortURLByShortURL(shortURL: string) {
   try {
     const result = await pgCli.query(
-      `DELETE FROM shortened_urls 
+      `DELETE FROM shortened_urls
        WHERE short_url = $1;
       `,
       [shortURL]
