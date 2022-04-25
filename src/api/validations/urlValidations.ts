@@ -1,14 +1,23 @@
 import { Context, Next } from "koa";
-import { isURL, isExpired } from "./validationHelper";
+import { isURL, isExpired, isValidTimeString } from "./validationHelper";
 
 const validateURL = async (ctx: Context, next: Next) => {
   const { url, expireDate } = ctx.request.body;
-  // let errorCount: number = 0;
+  const errorQueue = [];
 
-  // if (!isURL(url)) {
-  //   errorCount++;
-  // }
+  if (!isURL(url)) {
+    errorQueue.unshift({ message: "Invalid URL" });
+  }
 
+  if (isExpired(expireDate) || !isValidTimeString(expireDate)) {
+    errorQueue.unshift({ expire: "Invalid" });
+  }
+
+  if (errorQueue.length) {
+    ctx.status = 400;
+    ctx.body = { status: "failed", error: errorQueue };
+    return;
+  }
 
   next();
 };
