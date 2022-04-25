@@ -19,7 +19,7 @@ const handleCreateShortURL = async (ctx: Context) => {
 
   const result = await createShortUrlByUrl(url, shortURL, expire);
 
-  if (!result.length) {
+  if (!result?.length) {
     ctx.status = 500;
     ctx.body = { status: "failed", message: "Cannot create" };
     return;
@@ -27,7 +27,7 @@ const handleCreateShortURL = async (ctx: Context) => {
 
   const { id, short_url }: ShortURLResult = result[0];
 
-  ctx.status = 201;
+  ctx.status = 200;
   ctx.body = { status: "success", id, shortURL: short_url };
 };
 
