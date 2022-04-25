@@ -10,8 +10,9 @@ function makeShortURL(length: number) {
   return result;
 }
 
-function generateShortUrl(length: number) {
-  const shortURL = makeShortURL(length);
+function generateShortUrl(url: string, length: number) {
+  const hyperText = url.match(/^(http|https):\/\//g);
+  const shortURL = `${hyperText}${makeShortURL(length)}`;
   return shortURL;
 }
 
