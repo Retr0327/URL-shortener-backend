@@ -17,10 +17,15 @@
     "paths": {
       "src/*": ["./src/*"],
       "types": ["./src/typings.d.ts"],
-      "controllers/*": ["./src/controllers/*"]
+      "controllers/*": ["./src/api/controllers/*"],
+      "services/*": ["./src/api/services/*"],
+      "routes/*": ["./src/api/routes/*"],
+      "helpers/*": ["./src/api/helpers/*"], 
+      "models/*": ["./src/api/models/*"], 
+      "validations/*": ["./src/api/validations/*"], 
+      "constants/*": ["./src/api/constants/*"]
     }
   },
   "include": ["./src/**/*.ts", "./test/**/*.ts"],
   "exclude": ["node_modules"]
 }
-    
