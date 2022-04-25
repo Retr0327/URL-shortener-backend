@@ -21,6 +21,6 @@ const pgConfig = (): PoolConfig => {
   };
 };
 
-const URLSHORTENER = new PG.Pool(pgConfig());
+const pgCli = new PG.Pool(pgConfig());
 
-export default URLSHORTENER
+export default pgCli;
