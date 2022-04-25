@@ -1,4 +1,5 @@
 import { pgCli } from "../models";
+import { shortURLTable } from "../constants";
 
 async function createShortUrlByUrl(
   url: string,
@@ -7,12 +8,12 @@ async function createShortUrlByUrl(
 ) {
   try {
     const result = await pgCli.query(
-      `INSERT INTO shortened_urls (
+      `INSERT INTO ${shortURLTable} (
         full_url, 
         short_url, 
         expire)
       VALUES ($1, $2, $3)
-      RETURNING id, short_url
+      RETURNING id, short_url;
       `,
       [url, shortUrl, expire]
     );
@@ -26,7 +27,7 @@ async function createShortUrlByUrl(
 async function deleteShortURLByShortURL(shortURL: string) {
   try {
     const result = await pgCli.query(
-      `DELETE FROM shortened_urls
+      `DELETE FROM ${shortURLTable}
        WHERE short_url = $1;
       `,
       [shortURL]
@@ -38,4 +39,13 @@ async function deleteShortURLByShortURL(shortURL: string) {
   }
 }
 
-export { createShortUrlByUrl, deleteShortURLByShortURL };
+async function getAllShortURLs() {
+  try {
+    const result = await pgCli.query(`SELECT * FROM ${shortURLTable};`);
+    return result.rows;
+  } catch (error) {
+    console.error("getAllShortURL: ", error);
+  }
+}
+
+export { createShortUrlByUrl, deleteShortURLByShortURL, getAllShortURLs };
