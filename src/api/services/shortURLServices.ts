@@ -5,29 +5,37 @@ async function createShortUrlByUrl(
   shortUrl: string,
   expire: Date
 ) {
-  const result = await pgCli.query(
-    `INSERT INTO shortened_urls (
+  try {
+    const result = await pgCli.query(
+      `INSERT INTO shortened_urls (
         full_url, 
         short_url, 
         expire)
      VALUES ($1, $2, $3)
      RETURNING id, short_url
     `,
-    [url, shortUrl, expire]
-  );
+      [url, shortUrl, expire]
+    );
 
-  return result.rows;
+    return result.rows;
+  } catch (error) {
+    console.error("createShortUrlByUrl: ", error);
+  }
 }
 
 async function deleteShortURLByShortURL(shortURL: string) {
-  const result = await pgCli.query(
-    `DELETE FROM shortened_urls 
-     WHERE short_url = $1;
-    `,
-    [shortURL]
-  );
+  try {
+    const result = await pgCli.query(
+      `DELETE FROM shortened_urls 
+       WHERE short_url = $1;
+      `,
+      [shortURL]
+    );
 
-  return result.rows;
+    return result.rows;
+  } catch (error) {
+    console.error("deleteShortURLByShortURL: ", error);
+  }
 }
 
 export { createShortUrlByUrl, deleteShortURLByShortURL };
