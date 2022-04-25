@@ -1,5 +1,5 @@
 import { Context } from "koa";
-import generateShortUrl from "../helpers/generateShortURL";
+import { generateShortUrl } from "../helpers";
 import { createShortUrlByUrl } from "../services/shortURLServices";
 
 type ShortURLResult = {

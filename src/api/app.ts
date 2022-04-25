@@ -1,7 +1,7 @@
 import Koa from "koa";
 import cors from "@koa/cors";
 import koaBody from "koa-body";
-import corsConfig from "./helpers/corsConfig";
+import { corsConfig } from "./helpers";
 import { allURLsRoute, rootRoute, urlRoute } from "./routes";
 
 const app = new Koa();
