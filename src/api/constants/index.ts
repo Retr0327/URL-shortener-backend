@@ -1,3 +1,5 @@
+const shortURLTable = "shortened_urls";
+
 const dockerEnv = {
   pgUser: process.env.PGUSER,
   pgHost: process.env.PGHOST,
@@ -10,4 +12,4 @@ const dockerEnv = {
   period: process.env.NODE_ENV,
 };
 
-export { dockerEnv };
+export { dockerEnv, shortURLTable };
