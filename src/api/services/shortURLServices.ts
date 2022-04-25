@@ -3,7 +3,7 @@ import { pgCli } from "../models";
 async function createShortUrlByUrl(
   url: string,
   shortUrl: string,
-  expire: string
+  expire: Date
 ) {
   const { rows } = await pgCli.query(
     `INSERT INTO shortened_urls (
