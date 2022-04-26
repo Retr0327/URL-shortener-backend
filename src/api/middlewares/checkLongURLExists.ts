@@ -12,7 +12,7 @@ const checkLongURLExists = async (ctx: Context, next: Next) => {
   const { id, short_url: shortURL }: ShortURLResult = result[0];
 
   ctx.status = 200;
-  ctx.body = { status: "success", id, shortURL };
+  ctx.body = { status: "success", id, shortURL, message: "Duplicate" };
 };
 
 export default checkLongURLExists;
