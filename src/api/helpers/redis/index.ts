@@ -1,4 +1,4 @@
 import cacheURLs from "./cacheURLs";
-import deleteCachedURLs from "./deleteCachedURLs";
+import deleteCachedURL from "./deleteCachedURL";
 
-export { cacheURLs, deleteCachedURLs };
+export { cacheURLs, deleteCachedURL };

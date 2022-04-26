@@ -1,5 +1,5 @@
 import { Context } from "koa";
-import { deleteCachedURLs } from "../helpers/redis";
+import { deleteCachedURL } from "../helpers/redis";
 import { deleteShortUrlByShortURL } from "../services/shortURLServices";
 
 const handleDeleteShortURL = async (ctx: Context) => {
@@ -7,7 +7,7 @@ const handleDeleteShortURL = async (ctx: Context) => {
 
   await Promise.all([
     deleteShortUrlByShortURL(shortURL),
-    deleteCachedURLs(shortURL),
+    deleteCachedURL(shortURL),
   ]);
 
   ctx.status = 202;
