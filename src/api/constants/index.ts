@@ -1,4 +1,5 @@
 const shortURLTable = "shortened_urls";
+const redisKey = (shortURL: string) => `shortURL:${shortURL}`;
 
 const dockerEnv = {
   pgUser: process.env.PGUSER,
@@ -12,4 +13,4 @@ const dockerEnv = {
   period: process.env.NODE_ENV,
 };
 
-export { dockerEnv, shortURLTable };
+export { dockerEnv, shortURLTable, redisKey };
