@@ -48,4 +48,23 @@ async function getAllShortURLs() {
   }
 }
 
-export { createShortUrlByUrl, deleteShortURLByShortURL, getAllShortURLs };
+async function deleteShortUrlByShortURL(shortURL: string) {
+  try {
+    const result = await pgCli.query(
+      `DELETE FROM urls 
+       WHERE short_url=$1
+      `,
+      [shortURL]
+    );
+    return true;
+  } catch (error) {
+    console.error("deleteShortUrlByShortURL: ", error);
+  }
+}
+
+export {
+  createShortUrlByUrl,
+  deleteShortURLByShortURL,
+  getAllShortURLs,
+  deleteShortUrlByShortURL,
+};
