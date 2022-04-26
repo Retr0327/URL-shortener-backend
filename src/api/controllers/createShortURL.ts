@@ -1,12 +1,8 @@
 import { Context } from "koa";
 import { cacheURLs } from "../helpers/redis";
+import { ShortURLResult } from "src/typings";
 import { generateShortUrl, getExpireTime } from "../helpers";
 import { createShortUrlByUrl } from "../services/shortURLServices";
-
-type ShortURLResult = {
-  id: string;
-  short_url: string;
-};
 
 type RequestBody = {
   url: string;
