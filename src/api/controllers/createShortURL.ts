@@ -1,5 +1,6 @@
 import { Context } from "koa";
-import { generateShortUrl, cacheURLs, getExpireTime } from "../helpers";
+import { cacheURLs } from "../helpers/redis";
+import { generateShortUrl, getExpireTime } from "../helpers";
 import { createShortUrlByUrl } from "../services/shortURLServices";
 
 type ShortURLResult = {
