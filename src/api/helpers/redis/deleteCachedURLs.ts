@@ -1,9 +1,9 @@
 import { redisCli } from "../../models";
+import { redisKey } from "../../constants";
 
-function deleteCachedURLs(shortURL: string) {
-  const data = redisCli.get(shortURL);
-
-  console.log(data);
+async function deleteCachedURLs(shortURL: string) {
+  const key = redisKey(shortURL);
+  return redisCli.del(key);
 }
 
 export default deleteCachedURLs;
