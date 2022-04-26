@@ -1,4 +1,5 @@
 import { redisCli } from "../../models";
+import { redisKey } from "../../constants";
 
 const cacheURLs = async (
   id: string,
@@ -11,7 +12,7 @@ const cacheURLs = async (
   }
 
   expire = Math.ceil(expire);
-  const key = `shortURL:${shortUrl}`;
+  const key = redisKey(shortUrl);
 
   return Promise.all([
     redisCli.hset(key, [
