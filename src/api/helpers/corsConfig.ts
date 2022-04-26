@@ -9,7 +9,7 @@ const corsConfig: Options = {
     return "http://localhost:3001";
   },
   credentials: true,
-  allowMethods: ["GET", "POST"],
+  allowMethods: ["GET", "POST", "PUT"],
 };
 
 export default corsConfig;
