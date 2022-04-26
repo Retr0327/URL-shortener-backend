@@ -1,7 +1,7 @@
 import { redisCli } from "../../models";
 import { redisKey } from "../../constants";
 
-const cacheURLs = async (
+const cacheURL = async (
   id: string,
   url: string,
   shortUrl: string,
@@ -23,4 +23,4 @@ const cacheURLs = async (
   ]);
 };
 
-export default cacheURLs;
+export default cacheURL;

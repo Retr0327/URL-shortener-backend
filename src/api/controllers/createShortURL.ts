@@ -1,5 +1,5 @@
 import { Context } from "koa";
-import { cacheURLs } from "../helpers/redis";
+import { cacheURL } from "../helpers/redis";
 import { ShortURLResult } from "src/typings";
 import { generateShortUrl, getExpireTime } from "../helpers";
 import { createShortUrlByUrl } from "../services/shortURLServices";
@@ -24,7 +24,7 @@ const handleCreateShortURL = async (ctx: Context) => {
 
   const { id, short_url }: ShortURLResult = result[0];
 
-  await cacheURLs(id, url, short_url, getExpireTime(expire));
+  await cacheURL(id, url, short_url, getExpireTime(expire));
 
   ctx.status = 200;
   ctx.body = { status: "success", id, shortURL: short_url };
