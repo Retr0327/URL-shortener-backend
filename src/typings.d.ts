@@ -5,3 +5,8 @@ export type ShortURLResult = {
   created_at: Date;
   expire: Date;
 };
+
+export type CreatedURLRequestBody = {
+  url: string;
+  expireDate: string;
+};
