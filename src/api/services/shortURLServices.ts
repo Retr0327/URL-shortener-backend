@@ -51,7 +51,7 @@ async function getAllShortURLs() {
 async function deleteShortUrlByShortURL(shortURL: string) {
   try {
     const result = await pgCli.query(
-      `DELETE FROM urls 
+      `DELETE FROM ${shortURLTable}
        WHERE short_url=$1
       `,
       [shortURL]
