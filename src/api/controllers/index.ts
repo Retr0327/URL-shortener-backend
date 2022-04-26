@@ -1,5 +1,11 @@
+import handleRedirectURL from "./redirectURL";
 import handleCreateShortURL from "./createShortURL";
-import handleGetAllShortURLs from "./getAllShortURLs";
 import handleDeleteShortURL from "./deleteShortURL";
+import handleGetAllShortURLs from "./getAllShortURLs";
 
-export { handleCreateShortURL, handleGetAllShortURLs, handleDeleteShortURL };
+export {
+  handleCreateShortURL,
+  handleGetAllShortURLs,
+  handleDeleteShortURL,
+  handleRedirectURL,
+};
