@@ -15,7 +15,7 @@ const cacheURL = async (
   const key = redisKey(shortUrl);
 
   return Promise.all([
-    redisCli.hset(key, { id, shortUrl }),
+    redisCli.hset(key, { id, url }),
     redisCli.expire(key, expire),
   ]);
 };
