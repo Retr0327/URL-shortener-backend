@@ -1,4 +1,4 @@
-import { redisCli } from "../models";
+import { redisCli } from "../../models";
 
 function getKey(shortUrl: string) {
   return `shortURL:${shortUrl}`;
