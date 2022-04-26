@@ -24,6 +24,22 @@ async function createShortUrlByUrl(
   }
 }
 
+async function getShortURLByFullURL(fullURL: string) {
+  try {
+    const result = await pgCli.query(
+      `SELECT * FROM ${shortURLTable}
+       WHERE full_url = $1
+       AND expire > $2;
+      `,
+      [fullURL, new Date(new Date().toUTCString())]
+    );
+
+    return result.rows;
+  } catch (error) {
+    console.error("getFullURLByShortURL: ", error);
+  }
+}
+
 async function getFullURLByShortURL(shortURL: string) {
   try {
     const result = await pgCli.query(
@@ -84,4 +100,5 @@ export {
   getAllShortURLs,
   deleteShortUrlByShortURL,
   getFullURLByShortURL,
+  getShortURLByFullURL,
 };
