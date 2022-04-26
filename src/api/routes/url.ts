@@ -4,11 +4,12 @@ import {
   handleDeleteShortURL,
   handleGetAllShortURLs,
 } from "../controllers";
+import { checkLongURLExists } from "../middlewares";
 import validateURL from "../validations/urlValidations";
 
 const router = new KoaRouter({ prefix: "/url" });
 
-router.post("/", validateURL, handleCreateShortURL);
+router.post("/", validateURL, checkLongURLExists, handleCreateShortURL);
 router.post("/all", handleGetAllShortURLs);
 router.post("/delete", handleDeleteShortURL);
 
