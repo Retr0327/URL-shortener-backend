@@ -1,4 +1,5 @@
 import { Context } from "koa";
+import { ShortURLResult } from "src/typings";
 import { updateTotalClickByShortURL } from "../services/shortURLServices";
 
 const handleIncreaseClick = async (ctx: Context) => {
@@ -11,8 +12,10 @@ const handleIncreaseClick = async (ctx: Context) => {
     return;
   }
 
+  const { full_url }: ShortURLResult = result[0];
+
   ctx.status = 201;
-  ctx.body = { status: "success" };
+  ctx.body = { status: "success", url: full_url };
 };
 
 export default handleIncreaseClick;
