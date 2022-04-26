@@ -11,7 +11,7 @@ function makeShortURL(length: number) {
 }
 
 function generateShortUrl(url: string, length: number) {
-  const shortURL = `shorturl/${makeShortURL(length)}`;
+  const shortURL = makeShortURL(length);
   return shortURL;
 }
 
