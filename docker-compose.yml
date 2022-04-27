@@ -45,7 +45,7 @@ services:
       - /app/node_modules
       - ../url-shortener-frontend:/app
 
-    command: sh -c "npm start"
+    command: sh -c "rm -rf .next && npm run build && npm start"
 
     environment:
       - API_PORT=3000
