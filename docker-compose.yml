@@ -48,7 +48,7 @@ services:
     command: sh -c "npm start"
 
     environment:
-      - NEXT_PUBLIC_SERVER_URL=http://api:3000
+      - API_PORT=3000
       - NODE_ENV=production
 
     ports:
