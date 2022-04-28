@@ -1,6 +1,9 @@
 import { Context } from "koa";
+import {
+  getFullURLByShortURL,
+  updateTotalClickByShortURL,
+} from "../services/shortURLServices";
 import { ShortURLResult } from "src/typings";
-import { getFullURLByShortURL } from "../services/shortURLServices";
 
 const handleRedirectURL = async (ctx: Context) => {
   const { shortURL } = ctx.params;
@@ -13,6 +16,8 @@ const handleRedirectURL = async (ctx: Context) => {
   }
 
   const { full_url: fullURL }: ShortURLResult = result![0];
+
+  await updateTotalClickByShortURL(shortURL);
 
   ctx.status = 200;
   ctx.body = { status: "success", fullURL };
