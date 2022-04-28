@@ -1,5 +1,5 @@
 import corsConfig from "./corsConfig";
-import generateShortUrl from "./generateShortURL";
 import getExpireTime from "./getExpireTime";
+import generateShortURL from "./generateShortURL";
 
-export { corsConfig, generateShortUrl, getExpireTime };
+export { corsConfig, generateShortURL, getExpireTime };
