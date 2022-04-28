@@ -11,7 +11,7 @@ type RequestBody = {
 
 const handleCreateShortURL = async (ctx: Context) => {
   const { url, expireDate }: RequestBody = ctx.request.body;
-  const shortURL = generateShortUrl(url, 5);
+  const shortURL = generateShortUrl(5);
   const expire = new Date(expireDate);
 
   const result = await createShortUrlByUrl(url, shortURL, expire);
