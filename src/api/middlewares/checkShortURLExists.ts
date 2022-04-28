@@ -9,8 +9,8 @@ const checkShortURLExists = async (ctx: Context, next: Next) => {
     return next();
   }
 
-  ctx.status = 302;
-  ctx.redirect(result.url);
+  ctx.status = 200;
+  ctx.body = { fullURL: result.url };
 };
 
 export default checkShortURLExists;
