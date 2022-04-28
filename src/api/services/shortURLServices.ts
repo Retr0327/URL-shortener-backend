@@ -56,21 +56,6 @@ async function getFullURLByShortURL(shortURL: string) {
   }
 }
 
-async function deleteShortURLByShortURL(shortURL: string) {
-  try {
-    const result = await pgCli.query(
-      `DELETE FROM ${shortURLTable}
-       WHERE short_url = $1;
-      `,
-      [shortURL]
-    );
-
-    return result.rows;
-  } catch (error) {
-    console.error("deleteShortURLByShortURL: ", error);
-  }
-}
-
 async function getAllShortURLs() {
   try {
     const result = await pgCli.query(`SELECT * FROM ${shortURLTable};`);
@@ -106,13 +91,12 @@ async function updateTotalClickByShortURL(shortURL: string) {
     );
     return result.rows;
   } catch (error) {
-    console.error("deleteShortUrlByShortURL: ", error);
+    console.error("updateTotalClickByShortURL: ", error);
   }
 }
 
 export {
   createShortUrlByUrl,
-  deleteShortURLByShortURL,
   getAllShortURLs,
   deleteShortUrlByShortURL,
   getFullURLByShortURL,
