@@ -7,14 +7,15 @@ const handleRedirectURL = async (ctx: Context) => {
   const result = await getFullURLByShortURL(shortURL);
 
   if (!result!.length) {
-    ctx.status = 404;
+    ctx.status = 200;
+    ctx.body = { status: "success", message: "Expired" };
     return;
   }
 
   const { full_url: fullURL }: ShortURLResult = result![0];
 
   ctx.status = 200;
-  ctx.body = { fullURL };
+  ctx.body = { status: "success", fullURL };
 };
 
 export default handleRedirectURL;
