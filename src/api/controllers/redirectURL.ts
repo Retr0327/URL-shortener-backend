@@ -13,8 +13,8 @@ const handleRedirectURL = async (ctx: Context) => {
 
   const { full_url: fullURL }: ShortURLResult = result![0];
 
-  ctx.status = 302;
-  ctx.redirect(fullURL);
+  ctx.status = 200;
+  ctx.body = { fullURL };
 };
 
 export default handleRedirectURL;
