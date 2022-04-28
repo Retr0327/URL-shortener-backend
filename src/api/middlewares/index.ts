@@ -1,4 +1,5 @@
 import checkLongURLExists from "./checkLongURLExists";
 import checkShortURLExists from "./checkShortURLExists";
+import checkShortURLExpired from "./checkShortURLExpired";
 
-export { checkShortURLExists, checkLongURLExists };
+export { checkShortURLExists, checkLongURLExists, checkShortURLExpired };
