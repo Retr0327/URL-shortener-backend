@@ -16,6 +16,8 @@ services:
       - /app/node_modules
       - ./:/app
 
+    command: sh -c "pm2-runtime ./dist/src/server.js"
+
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
