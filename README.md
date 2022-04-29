@@ -93,7 +93,7 @@ Total time:           0.695564584 s
 Requests per second:  14
 Mean latency:         654 ms
 ```
-The time for server to handle 10 requests from each 10000 clients has reduced from 0.695564584 s to 0.269094041 s, and the server response time has dropped fro 654 ms to 212.2 ms, which is roughly twice as fast overall.  
+The time for server to handle 10 requests from each 10000 clients has reduced from 0.695564584 s to 0.269094041 s, and the server response time has dropped from 654 ms to 212.2 ms, which is roughly twice as fast overall.  
 
 
 ## Contact Me
