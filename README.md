@@ -80,7 +80,7 @@ Requests per second:  37
 Mean latency:         212.2 ms
 ```
 
-Without pm2 cluster mode:
+If we test the server without pm2 cluster mode:
 
 ```bash 
 INFO Target URL:      http://localhost/
