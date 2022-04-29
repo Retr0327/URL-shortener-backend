@@ -7,10 +7,10 @@ WORKDIR /app
 
 COPY ./package*.json ./
 
-RUN npm install
+RUN npm ci && npm install pm2 -g
 
 COPY ./ ./ 
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "build"]
