@@ -1,29 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "module": "CommonJS",
     "allowJs": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
-    "module": "CommonJS",
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "noEmit": false,
     "esModuleInterop": true,
+    "removeComments": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
     "baseUrl": ".",
+    "rootDirs": ["./src", "./test"],
+    "outDir": "./dist",
     "paths": {
       "src/*": ["./src/*"],
-      "types": ["./src/typings.d.ts"],
-      "controllers/*": ["./src/api/controllers/*"],
-      "services/*": ["./src/api/services/*"],
-      "routes/*": ["./src/api/routes/*"],
-      "helpers/*": ["./src/api/helpers/*"], 
-      "models/*": ["./src/api/models/*"], 
-      "validations/*": ["./src/api/validations/*"], 
-      "constants/*": ["./src/api/constants/*"]
+      "types": ["src/typings.ts"]
     }
   },
   "include": ["./src/**/*.ts", "./test/**/*.ts"],
