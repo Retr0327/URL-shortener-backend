@@ -33,7 +33,7 @@ end
 ### 1. Download the both frontend and backend projects: 
 ```bash
 git clone git@github.com:Retr0327/URL-shortener-frontend.git
-git@github.com:Retr0327/URL-shortener-backend.git
+git clone git@github.com:Retr0327/URL-shortener-backend.git
 ```
 Hence, the project strucutre should look like this: 
 
