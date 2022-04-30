@@ -12,5 +12,5 @@ module.exports = {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!@foo)"],
-};    
-    
+  setupFiles: ["<rootDir>/test/__mocks__/setEnvVars.js"],
+};
