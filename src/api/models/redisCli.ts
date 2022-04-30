@@ -3,7 +3,7 @@ import { dockerEnv } from "../constants";
 
 const { period, redisHost, redisPort } = dockerEnv;
 
-const redisConfig = () => {
+export const redisConfig = () => {
   if (period === "production") {
     return `redis://${redisHost}:${redisPort}`;
   }
