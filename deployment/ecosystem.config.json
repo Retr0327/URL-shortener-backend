@@ -5,10 +5,30 @@
       "cwd": "/app/",
       "watch": true,
       "name": "api-worker-0",
-      "instances": "4",
+      "instances": "2",
       "exec_mode": "cluster",
       "max_memory_restart": "2G",
       "env": { "NODE_ENV": "production", "PORT": 3000 }
+    },
+    {
+      "script": "dist/src/server.js",
+      "cwd": "/app/",
+      "watch": true,
+      "name": "api-worker-1",
+      "instances": "2",
+      "exec_mode": "cluster",
+      "max_memory_restart": "2G",
+      "env": { "NODE_ENV": "production", "PORT": 6666 }
+    },
+    {
+      "script": "dist/src/server.js",
+      "cwd": "/app/",
+      "watch": true,
+      "name": "api-worker-2",
+      "instances": "2",
+      "exec_mode": "cluster",
+      "max_memory_restart": "2G",
+      "env": { "NODE_ENV": "production", "PORT": 6688 }
     }
   ]
 }
