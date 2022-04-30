@@ -3,7 +3,7 @@ import { dockerEnv } from "../constants";
 
 const { period, pgDatabase, pgHost, pgPort, pgPassword, pgUser } = dockerEnv;
 
-const pgConfig = (): PoolConfig => {
+export const pgConfig = (): PoolConfig => {
   if (period === "production") {
     return {
       host: pgHost,
