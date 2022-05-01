@@ -1,7 +1,4 @@
 import { Options } from "@koa/cors";
-import { dockerEnv } from "../constants";
-
-const { period } = dockerEnv;
 
 const corsConfig: Options = {
   origin: (ctx) => {
@@ -10,7 +7,7 @@ const corsConfig: Options = {
     }
     let url = "http://localhost:3001";
 
-    if (period === "production") {
+    if (process.env.NODE_ENV === "production") {
       url = "http://client";
     }
 
