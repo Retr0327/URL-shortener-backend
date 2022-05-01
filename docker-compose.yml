@@ -16,7 +16,7 @@ services:
       - /app/node_modules
       - ./:/app
 
-    command: sh -c "pm2-runtime ./deployment/ecosystem.config.json"
+    command: sh -c "npm run build && pm2-runtime ./deployment/ecosystem.config.json"
 
     environment:
       - REDIS_HOST=redis
