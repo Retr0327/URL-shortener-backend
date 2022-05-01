@@ -1,16 +1,13 @@
 import PG, { PoolConfig } from "pg";
-import { dockerEnv } from "../constants";
-
-const { period, pgDatabase, pgHost, pgPort, pgPassword, pgUser } = dockerEnv;
 
 export const pgConfig = (): PoolConfig => {
-  if (period === "production") {
+  if (process.env.NODE_ENV === "production") {
     return {
-      host: pgHost,
-      user: pgUser,
-      database: pgDatabase,
-      password: pgPassword,
-      port: Number(pgPort),
+      host: process.env.PGHOST,
+      user: process.env.PGUSER,
+      database: process.env.PGDATABASE,
+      password: process.env.PGPASSWORD,
+      port: Number(process.env.PGPORT),
     };
   }
 
