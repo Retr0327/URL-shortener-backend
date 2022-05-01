@@ -32,13 +32,37 @@ describe("POST Endpoints", () => {
       expect(deleteResponse.statusCode).toEqual(202);
     });
 
-    test(`should return error {"errors": [{"url": "Invalid URL"}]}`, async () => {
+    test(`should return error {"error": [{"message": "Invalid URL"}]}`, async () => {
       const response = await request(server).post("/url").send({
         url: "1https://github.com/Retr0327",
         expireDate,
       });
 
       const actual = { status: "failed", error: [{ message: "Invalid URL" }] };
+
+      expect(response.statusCode).toEqual(400);
+      expect(response.body).toMatchObject(actual);
+    });
+
+    test(`should return error {"error": [{"expire": "Invalid"}]}`, async () => {
+      const response = await request(server).post("/url").send({
+        url: "https://github.com/Retr0327",
+        expireDate: "1970-02-08T09:20:41Z",
+      });
+
+      const actual = { status: "failed", error: [{ expire: "Invalid" }] };
+
+      expect(response.statusCode).toEqual(400);
+      expect(response.body).toMatchObject(actual);
+    });
+
+    test(`should return error {"error": [{"expire": "Invalid"}]}`, async () => {
+      const response = await request(server).post("/url").send({
+        url: "https://github.com/Retr0327",
+        expireDate: "2036-0208T09:20:41Z",
+      });
+
+      const actual = { status: "failed", error: [{ expire: "Invalid" }] };
 
       expect(response.statusCode).toEqual(400);
       expect(response.body).toMatchObject(actual);
