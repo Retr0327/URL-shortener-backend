@@ -1,11 +1,8 @@
 import Redis from "ioredis";
-import { dockerEnv } from "../constants";
-
-const { period, redisHost, redisPort } = dockerEnv;
 
 export const redisConfig = () => {
-  if (period === "production") {
-    return `redis://${redisHost}:${redisPort}`;
+  if (process.env.NODE_ENV === "production") {
+    return `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`;
   }
   return "";
 };
