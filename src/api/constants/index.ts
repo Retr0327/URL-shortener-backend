@@ -1,4 +1,4 @@
-const shortURLTable = "url-shortener";
+const shortURLTable = "shortened_urls";
 const redisKey = (shortURL: string) => `shortURL:${shortURL}`;
 
 export { shortURLTable, redisKey };
