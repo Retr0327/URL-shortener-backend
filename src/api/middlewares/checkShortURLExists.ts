@@ -12,7 +12,7 @@ const checkShortURLExists = async (ctx: Context, next: Next) => {
 
   await updateTotalClickByShortURL(shortURL);
   ctx.status = 200;
-  ctx.body = { fullURL: result.url };
+  ctx.body = { status: "success", fullURL: result.url };
 };
 
 export default checkShortURLExists;
