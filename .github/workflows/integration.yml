@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Integration
 
 # when do we want to run the jobs (here, when push and pull request)
 on:
@@ -40,5 +40,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
+      - run: npm install
       - run: npm run test
