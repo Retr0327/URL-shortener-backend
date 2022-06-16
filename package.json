@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "test": "npx kill-port 3000 && node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --forceExit --maxWorkers=1",
-    "start": "npx kill-port 3000 && nodemon -L --config nodemon.json",
-    "build": "rm -rf ./dist && npx tsc"
+    "dev": "npx kill-port 3000 && nodemon -L --config nodemon.json",
+    "build": "webpack --mode production",
+    "start": "node ./dist/index.js",
+    "test": "npx kill-port 3000 && node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --forceExit --maxWorkers=1"
   },
   "keywords": [],
   "author": "",
