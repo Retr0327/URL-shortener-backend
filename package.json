@@ -24,7 +24,8 @@
     "koa-helmet": "^6.1.0",
     "koa-morgan": "^1.0.1",
     "supertest": "^6.2.2",
-    "ts-jest": "^27.1.4"
+    "ts-jest": "^27.1.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
