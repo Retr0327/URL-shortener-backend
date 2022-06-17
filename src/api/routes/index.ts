@@ -2,7 +2,7 @@ import Router from "@koa/router";
 import { urlRoutes } from "./urlRoutes";
 import { RouterContext } from "@koa/router";
 
-const router = new Router({ prefix: "/v1" });
+const router = new Router({});
 
 router.get("/", (ctx: RouterContext) => {
   const ip = ctx.request.ip.replace("::ffff:", "");
