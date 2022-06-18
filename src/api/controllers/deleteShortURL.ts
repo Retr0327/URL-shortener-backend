@@ -5,11 +5,11 @@ import { PrismaClient } from "@prisma/client";
 const { shortUrls } = new PrismaClient();
 
 const handleDeleteShortURL = async (ctx: RouterContext) => {
-  const { id, shortURL } = ctx.request.body;
+  const { shortURL } = ctx.request.body;
 
   await Promise.all([
     removeCachedURL(shortURL),
-    shortUrls.delete({ where: { id } }),
+    shortUrls.delete({ where: { shortURL } }),
   ]);
 
   ctx.status = 202;
