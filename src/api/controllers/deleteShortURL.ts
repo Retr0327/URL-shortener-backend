@@ -1,13 +1,15 @@
 import { Context } from "koa";
-import { deleteCachedURL } from "../helpers/redis";
-import { deleteShortUrlByShortURL } from "../services/shortURLServices";
+import { removeCachedURL } from "@utils";
+import { PrismaClient } from "@prisma/client";
+
+const { shortUrls } = new PrismaClient();
 
 const handleDeleteShortURL = async (ctx: Context) => {
-  const { shortURL } = ctx.request.body;
+  const { id, shortURL } = ctx.request.body;
 
   await Promise.all([
-    deleteShortUrlByShortURL(shortURL),
-    deleteCachedURL(shortURL),
+    removeCachedURL(shortURL),
+    shortUrls.delete({ where: { id } }),
   ]);
 
   ctx.status = 202;
