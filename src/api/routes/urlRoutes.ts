@@ -1,15 +1,31 @@
-import Router, { RouterContext } from "@koa/router";
-import { validateCreateShortURL } from "../validations";
+import {
+  handleCreateShortURL,
+  handleGetAllShortURLs,
+  handleDeleteShortURL,
+  handleIncreaseClick,
+} from "@controllers";
+import Router from "@koa/router";
+import { checkLongURLExists, checkShortURLTTL } from "@middlewares";
+import { validateCreateShortURL, validateShortURL } from "@validations";
 
 const router = new Router({ prefix: "/url" });
 
-router.post("/", validateCreateShortURL, (ctx: RouterContext) => {
-    ctx.body = { msg: '1'}
-})
+router.post(
+  "/",
+  validateCreateShortURL,
+  checkLongURLExists,
+  handleCreateShortURL
+);
 
-// router.post("/", validateURL, checkLongURLExists, handleCreateShortURL);
-// router.post("/all", handleGetAllShortURLs);
-// router.put("/increase", checkShortURLExpired, handleIncreaseClick);
-// router.post("/delete", handleDeleteShortURL);
+router.post("/all", handleGetAllShortURLs);
+
+router.post("/delete", validateShortURL, handleDeleteShortURL);
+
+router.put(
+  "/increase",
+  checkShortURLTTL,
+  validateShortURL,
+  handleIncreaseClick
+);
 
 export { router as urlRoutes };
