@@ -2,7 +2,7 @@ import customDevFormat from "./logger";
 import getExpireTime from "./expireTime";
 import generateRedisKey from "./redisKey";
 import generateShortURL from "./shortURLGenerator";
-import { cacheURL, removeCachedURL } from "./cache";
+import { cacheURL, removeCachedURL, getCachedURL } from "./cache";
 
 export {
   getExpireTime,
@@ -11,4 +11,5 @@ export {
   generateRedisKey,
   cacheURL,
   removeCachedURL,
+  getCachedURL,
 };
