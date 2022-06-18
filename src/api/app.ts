@@ -3,7 +3,7 @@ import router from "@routes";
 import cors from "@koa/cors";
 import helmet from "koa-helmet";
 import morgan from "koa-morgan";
-import { corsConfig } from "./helpers";
+import { corsConfig } from "@config";
 import bodyParser from "koa-bodyparser";
 import { customDevFormat } from "@utils";
 
