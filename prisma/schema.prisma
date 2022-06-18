@@ -9,8 +9,8 @@ datasource db {
 
 model ShortUrls {
   id         Int      @id @default(autoincrement())
-  fullURL    String   @map("full_url")
-  shortURL   String   @map("short_url")
+  fullURL    String   @unique @map("full_url")
+  shortURL   String   @unique @map("short_url")
   totalClick Int      @default(0) @map("total_click")
   createdAt  DateTime @default(now()) @map("created_at")
   expire     DateTime @map("expire")
