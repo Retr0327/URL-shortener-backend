@@ -1,3 +1,4 @@
-import cacheURL from "./cacheURL";
+import cacheURL from "./URLcacher";
+import removeCachedURL from "./URLRemover";
 
-export { cacheURL };
+export { cacheURL, removeCachedURL };
