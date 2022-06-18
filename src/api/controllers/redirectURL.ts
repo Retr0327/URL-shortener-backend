@@ -1,26 +1,35 @@
-import { Context } from "koa";
-import {
-  getFullURLByShortURL,
-  updateTotalClickByShortURL,
-} from "../services/shortURLServices";
-import { ShortURLResult } from "src/typings";
+import { RouterContext } from "@koa/router";
+import { PrismaClient } from "@prisma/client";
 
-const handleRedirectURL = async (ctx: Context) => {
+const { shortUrls } = new PrismaClient();
+
+const handleRedirectURL = async (ctx: RouterContext) => {
   const { shortURL } = ctx.params;
-  const result = await getFullURLByShortURL(shortURL);
+  const longURLResult = await shortUrls.findUnique({
+    where: { shortURL },
+    select: { fullURL: true },
+  });
 
-  if (!result!.length) {
+  if (longURLResult == null) {
     ctx.status = 200;
     ctx.body = { status: "success", message: "Expired" };
     return;
   }
 
-  const { full_url: fullURL }: ShortURLResult = result![0];
+  const updateResult = await shortUrls.update({
+    where: { shortURL },
+    data: { totalClick: { increment: 1 } },
+    select: { fullURL: true },
+  });
 
-  await updateTotalClickByShortURL(shortURL);
+  if (updateResult == null) {
+    ctx.status = 500;
+    ctx.body = { status: "failed", message: "Cannot add" };
+    return;
+  }
 
   ctx.status = 200;
-  ctx.body = { status: "success", fullURL };
+  ctx.body = { status: "success", fullURL: updateResult.fullURL };
 };
 
 export default handleRedirectURL;
