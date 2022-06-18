@@ -1,5 +1,5 @@
 import customDevFormat from "./logger";
 import getExpireTime from "./getExpireTime";
-import generateShortURL from "./generateShortURL";
+import generateShortURL from "./shortURLGenerator";
 
 export { getExpireTime, customDevFormat, generateShortURL };
