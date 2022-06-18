@@ -1,6 +1,6 @@
-import Router from "@koa/router";
 import { urlRoutes } from "./urlRoutes";
-import { RouterContext } from "@koa/router";
+import Router, { RouterContext } from "@koa/router";
+import { redirectURLRoute } from "./redirectURLRoute";
 
 const router = new Router({});
 
@@ -10,7 +10,7 @@ router.get("/", (ctx: RouterContext) => {
   ctx.body = { status: "success", ip };
 });
 
-const routes = [urlRoutes];
+const routes = [urlRoutes, redirectURLRoute];
 
 for (let route of routes) {
   router.use(route.routes());
