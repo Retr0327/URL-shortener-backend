@@ -11,7 +11,7 @@ function isExpired(timeString: string) {
   const expire = new Date(timeString);
   const now = new Date(new Date().toUTCString());
 
-  return expire < now;
+  return expire > now;
 }
 
 function isValidTimeString(timeString: string) {
