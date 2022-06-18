@@ -2,7 +2,6 @@ import * as Yup from "yup";
 import { validate } from "@middlewares";
 
 const requestSchema = Yup.object({
-  id: Yup.number().required(),
   shortURL: Yup.string()
     .test((value) => value?.length === 5)
     .required(),
@@ -10,6 +9,6 @@ const requestSchema = Yup.object({
   .noUnknown(true)
   .strict();
 
-const validateDeleteShortURL = validate(requestSchema);
+const validateShortURL = validate(requestSchema);
 
-export default validateDeleteShortURL;
+export default validateShortURL;
