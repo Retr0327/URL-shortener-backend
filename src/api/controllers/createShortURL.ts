@@ -1,33 +1,44 @@
-import { Context } from "koa";
-import { cacheURL } from "../helpers/redis";
-import { ShortURLResult } from "src/typings";
-import { generateShortURL, getExpireTime } from "../helpers";
-import { createShortUrlByUrl } from "../services/shortURLServices";
+import { cacheURL } from "@utils";
+import { RouterContext } from "@koa/router";
+import { PrismaClient } from "@prisma/client";
+import { generateShortURL, getExpireTime } from "@utils";
 
 type RequestBody = {
   url: string;
   expireDate: string;
 };
 
-const handleCreateShortURL = async (ctx: Context) => {
+const { shortUrls } = new PrismaClient();
+
+const handleCreateShortURL = async (ctx: RouterContext) => {
   const { url, expireDate }: RequestBody = ctx.request.body;
   const shortURL = generateShortURL(5);
   const expire = new Date(expireDate);
 
-  const result = await createShortUrlByUrl(url, shortURL, expire);
+  const urlResult = await shortUrls.create({
+    data: { fullURL: url, shortURL, expire },
+    select: { id: true, fullURL: true, shortURL: true },
+  });
 
-  if (!result?.length) {
+  if (urlResult == null) {
     ctx.status = 500;
     ctx.body = { status: "failed", message: "Cannot create" };
     return;
   }
 
-  const { id, short_url }: ShortURLResult = result[0];
+  await cacheURL(
+    urlResult.id.toString(),
+    urlResult.fullURL,
+    urlResult.shortURL,
+    getExpireTime(expire)
+  );
 
-  await cacheURL(id, url, short_url, getExpireTime(expire));
-
-  ctx.status = 200;
-  ctx.body = { status: "success", id, shortURL: short_url };
+  ctx.status = 201;
+  ctx.body = {
+    status: "success",
+    id: urlResult.id,
+    shortURL: urlResult.shortURL,
+  };
 };
 
 export default handleCreateShortURL;
