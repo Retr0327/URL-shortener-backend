@@ -7,7 +7,7 @@ const requestSchema = Yup.object({
     .required()
     .test((value) => isValidURL(value!)),
   expireDate: Yup.string()
-    .test((value) => isExpired(value!) || !isValidTimeString(value!))
+    .test((value) => isExpired(value!) || isValidTimeString(value!))
     .required(),
 })
   .noUnknown(true)
