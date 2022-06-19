@@ -1,6 +1,6 @@
 import { ServerResponse } from "http";
 import { compile, TokenIndexer } from "koa-morgan";
-import { IncomingMessageWithKoaSession } from "types";
+import { IncomingMessageWithKoaSession } from "@types";
 
 function addPadding(word: string | undefined, padding: number): string {
   if (word == undefined) {
