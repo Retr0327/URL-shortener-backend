@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { handleRedirectURL } from "@controllers";
-import { checkShortURLExists } from "@middlewares";
+import { checkShortURLExists } from "@middlewares/urlChecker";
 
 const router = new Router({});
 

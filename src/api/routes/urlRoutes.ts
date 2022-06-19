@@ -5,8 +5,8 @@ import {
   handleIncreaseClick,
 } from "@controllers";
 import Router from "@koa/router";
-import { checkLongURLExists, checkShortURLTTL } from "@middlewares";
 import { validateCreateShortURL, validateShortURL } from "@validations";
+import { checkLongURLExists, checkShortURLTTL } from "@middlewares/urlChecker";
 
 const router = new Router({ prefix: "/url" });
 

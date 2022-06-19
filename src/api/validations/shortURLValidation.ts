@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { validate } from "@middlewares";
+import { validate } from "@middlewares/index";
 
 const requestSchema = Yup.object({
   shortURL: Yup.string()

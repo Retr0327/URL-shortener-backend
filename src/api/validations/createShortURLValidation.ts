@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { validate } from "@middlewares";
+import { validate } from "@middlewares/index";
 import { isValidURL, isExpired, isValidTimeString } from "./helpers";
 
 const requestSchema = Yup.object({
