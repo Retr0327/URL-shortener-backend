@@ -8,7 +8,7 @@ const { shortUrls } = new PrismaClient();
 const checkLongURLExists = async (ctx: RouterContext, next: Next) => {
   const { url }: CreatedURLRequestBody = ctx.request.body;
 
-  const result = await shortUrls.findMany({
+  const result = await shortUrls.findUnique({
     where: { fullURL: url },
     select: { id: true, shortURL: true },
   });
@@ -18,7 +18,7 @@ const checkLongURLExists = async (ctx: RouterContext, next: Next) => {
     return;
   }
 
-  const { id, shortURL } = result[0];
+  const { id, shortURL } = result;
   ctx.status = 200;
   ctx.body = { status: "success", id, shortURL, message: "Exists" };
 };
