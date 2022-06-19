@@ -2,7 +2,7 @@ import { Options } from "@koa/cors";
 
 const corsConfig: Options = {
   origin: (ctx) => {
-    const whiteList = ["http://localhost:3001", process.env.URL];
+    const whiteList = ["http://localhost:3001", process.env.PRODUCTION_URL];
     const origin = ctx.request.header.origin ?? "";
 
     if (whiteList.includes(origin)) {
