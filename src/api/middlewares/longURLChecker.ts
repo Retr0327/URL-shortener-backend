@@ -1,7 +1,7 @@
 import { Next } from "koa";
 import { RouterContext } from "@koa/router";
 import { PrismaClient } from "@prisma/client";
-import { CreatedURLRequestBody } from "types";
+import { CreatedURLRequestBody } from "@types";
 
 const { shortUrls } = new PrismaClient();
 
