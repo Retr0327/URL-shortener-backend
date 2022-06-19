@@ -32,7 +32,7 @@
       "src/*": ["./src/*"],
       "@config": ["src/api/config/index.ts"],
       "@validations": ["src/api/validations/index.ts"], 
-      "@middlewares": ["src/api/middlewares/index.ts"],
+      "@middlewares/*": ["src/api/middlewares/*"],
       "@utils": ["src/api/utils/index.ts"],
       "@helpers": ["src/api/helpers/index.ts"],
       "@controllers": ["src/api/controllers/index.ts"],
