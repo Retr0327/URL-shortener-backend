@@ -15,7 +15,7 @@ const config: Config.InitialOptions = {
     "src/(.*)": "<rootDir>/src/$1",
     "@config": "<rootDir>/src/api/config/index.ts",
     "@validations": "<rootDir>/src/api/validations/index.ts",
-    "@middlewares": "<rootDir>/src/api/middlewares/index.ts",
+    "@middlewares/(.*)": "<rootDir>/src/api/middlewares/$1",
     "@utils": "<rootDir>/src/api/utils/index.ts",
     "@controllers": "<rootDir>/src/api/controllers/index.ts",
     "@routes": "<rootDir>/src/api/routes/index.ts",
