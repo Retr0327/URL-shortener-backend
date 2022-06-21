@@ -1,12 +1,15 @@
 import server from "src/server";
 import request from "supertest";
-import { deleteCachedURL } from "src/api/helpers/redis";
-import { getShortURLByFullURL } from "src/api/services/shortURLServices";
+import { PrismaClient } from "@prisma/client";
+
+const { shortUrls } = new PrismaClient();
 
 let expireDate: Date;
+let errorResponse: { status: string; msg: string };
 
 beforeAll(() => {
   expireDate = new Date(Date.now() + 60 * 60 * 1000);
+  errorResponse = { status: "failed", msg: "invalid request body" };
 });
 
 afterAll(() => {
@@ -20,23 +23,20 @@ describe("POST Endpoints", () => {
         url: "https://github.com/Retr0327",
         expireDate,
       });
-
-      expect(response.statusCode).toEqual(200);
+      expect(response.statusCode).toEqual(201);
       expect(response.body.status).toBe("success");
       expect(response.body).toHaveProperty("id");
       expect(response.body).toHaveProperty("shortURL");
     });
 
-    test(`should return error {"error": [{"message": "Invalid URL"}]}`, async () => {
+    test(`should return { status: 'failed', msg: 'invalid request body' } due to wrong url format`, async () => {
       const response = await request(server).post("/url").send({
         url: "1https://github.com/Retr0327",
         expireDate,
       });
 
-      const actual = { status: "failed", error: [{ message: "Invalid URL" }] };
-
-      expect(response.statusCode).toEqual(400);
-      expect(response.body).toMatchObject(actual);
+      expect(response.statusCode).toEqual(422);
+      expect(response.body).toMatchObject(errorResponse);
     });
 
     test(`should return error {"error": [{"expire": "Invalid"}]}`, async () => {
@@ -45,10 +45,8 @@ describe("POST Endpoints", () => {
         expireDate: "1970-02-08T09:20:41Z",
       });
 
-      const actual = { status: "failed", error: [{ expire: "Invalid" }] };
-
-      expect(response.statusCode).toEqual(400);
-      expect(response.body).toMatchObject(actual);
+      expect(response.statusCode).toEqual(422);
+      expect(response.body).toMatchObject(errorResponse);
     });
 
     test(`should return error {"error": [{"expire": "Invalid"}]}`, async () => {
@@ -57,10 +55,8 @@ describe("POST Endpoints", () => {
         expireDate: "2036-0208T09:20:41Z",
       });
 
-      const actual = { status: "failed", error: [{ expire: "Invalid" }] };
-
-      expect(response.statusCode).toEqual(400);
-      expect(response.body).toMatchObject(actual);
+      expect(response.statusCode).toEqual(422);
+      expect(response.body).toMatchObject(errorResponse);
     });
   });
 
@@ -80,15 +76,18 @@ describe("POST Endpoints", () => {
 describe("GET Endpoints", () => {
   describe("Get /api/:shortURL", () => {
     test("should return fullURL", async () => {
-      const result = await getShortURLByFullURL("https://github.com/Retr0327");
-      const { short_url: shortURL } = result![0];
+      const result = await shortUrls.findUnique({
+        where: { fullURL: "https://github.com/Retr0327" },
+        select: { shortURL: true },
+      });
 
+      const shortURL = result?.shortURL;
+      const response = await request(server).get(`/${shortURL}`);
       const actual = {
         status: "success",
         fullURL: "https://github.com/Retr0327",
       };
 
-      const response = await request(server).get(`/${shortURL}`);
       expect(response.body).toMatchObject(actual);
     });
   });
@@ -96,12 +95,13 @@ describe("GET Endpoints", () => {
 
 describe("POST /api/url/delete", () => {
   test("should return success", async () => {
-    const result = await getShortURLByFullURL("https://github.com/Retr0327");
-
-    const { short_url: shortURL } = result![0];
+    const result = await shortUrls.findUnique({
+      where: { fullURL: "https://github.com/Retr0327" },
+      select: { shortURL: true },
+    });
 
     const response = await request(server).post("/url/delete").send({
-      shortURL,
+      shortURL: result?.shortURL,
     });
 
     expect(response.statusCode).toEqual(202);
