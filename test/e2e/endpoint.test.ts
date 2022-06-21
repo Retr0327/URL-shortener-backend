@@ -39,7 +39,7 @@ describe("POST Endpoints", () => {
       expect(response.body).toMatchObject(errorResponse);
     });
 
-    test(`should return error {"error": [{"expire": "Invalid"}]}`, async () => {
+    test(`should return { status: 'failed', msg: 'invalid request body' } due to wrong expire date`, async () => {
       const response = await request(server).post("/url").send({
         url: "https://github.com/Retr0327",
         expireDate: "1970-02-08T09:20:41Z",
@@ -49,7 +49,7 @@ describe("POST Endpoints", () => {
       expect(response.body).toMatchObject(errorResponse);
     });
 
-    test(`should return error {"error": [{"expire": "Invalid"}]}`, async () => {
+    test(`should return { status: 'failed', msg: 'invalid request body' } due to wrong expire date`, async () => {
       const response = await request(server).post("/url").send({
         url: "https://github.com/Retr0327",
         expireDate: "2036-0208T09:20:41Z",
