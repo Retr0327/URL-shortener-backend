@@ -1,3 +1,5 @@
-import corsConfig from "./corsConfig";
+const isProduction = process.env.NODE_ENV === 'production';
 
-export { corsConfig };
+const PREFIX = isProduction ? '/api' : '/';
+
+export default PREFIX;
