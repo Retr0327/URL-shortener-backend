@@ -24,6 +24,7 @@ specifiers:
   koa-helmet: ^6.1.0
   koa-morgan: ^1.0.1
   nodemon: ^2.0.15
+  prettier: ^2.7.1
   prisma: ^3.15.2
   supertest: ^6.2.2
   ts-jest: ^28.0.5
@@ -60,6 +61,7 @@ devDependencies:
   husky: 8.0.1
   jest: 28.1.3_2263m44mchjafa7bz7l52hbcpa
   nodemon: 2.0.20
+  prettier: 2.7.1
   prisma: 3.15.2
   ts-jest: 28.0.8_tdm5zcqep4nsvpmkmbrzs32za4
   ts-node: 10.9.1_ksn4eycaeggbrckn3ykh37hwf4
@@ -2898,6 +2900,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: true
+
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-format/27.5.1:
