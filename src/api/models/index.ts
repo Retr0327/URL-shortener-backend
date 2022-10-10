@@ -1,3 +1,4 @@
-import redisCli from "./redisCli";
+import redis from './redis';
+import prisma from './prisma';
 
-export { redisCli };
+export { redis, prisma };
