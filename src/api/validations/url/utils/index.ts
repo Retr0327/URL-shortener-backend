@@ -1,5 +1,6 @@
 const isValidURL = (url: string) => {
   try {
+    /* eslint-disable no-new */
     new URL(url);
   } catch (error) {
     return false;
@@ -16,7 +17,7 @@ function isExpired(timeString: string) {
 
 function isValidTimeString(timeString: string) {
   const date = new Date(timeString).toString();
-  return date !== "Invalid Date";
+  return date !== 'Invalid Date';
 }
 
 export { isValidURL, isExpired, isValidTimeString };
