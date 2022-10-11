@@ -13,7 +13,7 @@ model ShortUrls {
   shortURL   String   @unique @map("short_url")
   totalClick Int      @default(0) @map("total_click")
   createdAt  DateTime @default(now()) @map("created_at")
-  expire     DateTime @map("expire")
+  expire     DateTime
 
   @@map("short_urls")
 }
