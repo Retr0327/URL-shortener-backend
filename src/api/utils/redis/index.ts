@@ -1,6 +1,6 @@
 import hsetURL from './hset';
 import getRedisKey from './key';
 import getCachedURL from './get';
-import removeCachedURL from './remove';
+import removeCachedURL from './delete';
 
 export { hsetURL, getRedisKey, getCachedURL, removeCachedURL };
