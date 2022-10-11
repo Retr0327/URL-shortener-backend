@@ -1,20 +1,23 @@
-import { urlRoutes } from "./urlRoutes";
-import Router, { RouterContext } from "@koa/router";
-import { redirectURLRoute } from "./redirectURLRoute";
+import PREFIX from '@config';
+import Router, { RouterContext } from '@koa/router';
+import urlRouter from './url';
+import redirectRouter from './redirect';
 
-const router = new Router({});
+const entry = new Router();
 
-router.get("/", (ctx: RouterContext) => {
-  const ip = ctx.request.ip.replace("::ffff:", "");
+entry.prefix(PREFIX);
+
+entry.get('/', (ctx: RouterContext) => {
+  const ip = ctx.request.ip.replace('::ffff:', '');
   ctx.status = 200;
-  ctx.body = { status: "success", ip };
+  ctx.body = { status: 'success', ip };
 });
 
-const routes = [urlRoutes, redirectURLRoute];
+const routers = [urlRouter, redirectRouter];
 
-for (let route of routes) {
-  router.use(route.routes());
-  router.use(route.allowedMethods());
-}
+routers.forEach((router) => {
+  entry.use(router.routes());
+  entry.use(router.allowedMethods());
+});
 
-export default router;
+export default entry;
