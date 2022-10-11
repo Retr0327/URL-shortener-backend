@@ -10,7 +10,7 @@ const checkTTL = (): Middleware => async (ctx, next) => {
 
   if (result === null) {
     ctx.status = 200;
-    ctx.body = { status: 'success', message: 'Expired' };
+    ctx.body = { status: 'success', msg: 'expired' };
     return;
   }
 
