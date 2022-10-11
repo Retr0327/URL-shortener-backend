@@ -1,8 +1,8 @@
-import * as Yup from "yup";
-import { validate } from "@middlewares/index";
+import { object, string } from 'yup';
+import validate from '../validator';
 
-const requestSchema = Yup.object({
-  shortURL: Yup.string()
+const requestSchema = object({
+  shortURL: string()
     .test((value) => value?.length === 5)
     .required(),
 })
