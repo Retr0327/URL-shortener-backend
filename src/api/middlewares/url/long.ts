@@ -2,7 +2,7 @@ import { URL } from 'types';
 import { prisma } from '@models';
 import { Middleware } from '@koa/router';
 
-type Request = Pick<URL, 'url' | 'expire'>;
+type Request = Pick<URL, 'url' | 'expireDate'>;
 
 const hasLongURL = (): Middleware => async (ctx, next) => {
   const { url } = ctx.request.body as Request;
