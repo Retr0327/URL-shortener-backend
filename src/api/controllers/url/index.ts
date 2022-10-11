@@ -1,5 +1,6 @@
+import handleIncreaseClick from './put';
 import handleGetAllShortURLs from './get';
 import handleCreateShortURL from './create';
 import handleDeleteShortURL from './delete';
 
-export { handleGetAllShortURLs, handleCreateShortURL, handleDeleteShortURL };
+export { handleIncreaseClick, handleGetAllShortURLs, handleCreateShortURL, handleDeleteShortURL };
