@@ -12,7 +12,7 @@ const hasLongURL = (): Middleware => async (ctx, next) => {
     select: { id: true, shortURL: true },
   });
 
-  if (result == null) {
+  if (result === null) {
     await next();
     return;
   }
