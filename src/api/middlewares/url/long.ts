@@ -19,7 +19,7 @@ const hasLongURL = (): Middleware => async (ctx, next) => {
 
   const { id, shortURL } = result;
   ctx.status = 200;
-  ctx.body = { status: 'success', id, shortURL, msg: 'exists' };
+  ctx.body = { status: 'success', data: { id, shortURL }, msg: 'exists' };
 };
 
 export default hasLongURL;

@@ -23,7 +23,7 @@ const hasShortURL = (): Middleware => async (ctx, next) => {
   }
 
   ctx.status = 200;
-  ctx.body = { status: 'success', fullURL: cachedResult.url };
+  ctx.body = { status: 'success', data: { fullURL: cachedResult.url } };
 };
 
 export default hasShortURL;
