@@ -12,10 +12,10 @@ const router = new Router({ prefix: '/url' });
 
 router.post('/', validateCreateURL, hasLongURL(), handleCreateShortURL);
 
-router.post('/all', handleGetAllShortURLs);
+router.get('/', handleGetAllShortURLs);
 
-router.post('/delete', validateShortURL, handleDeleteShortURL);
+router.delete('/', validateShortURL, handleDeleteShortURL);
 
-router.put('/increase', checkTTL, validateShortURL, handleIncreaseClick);
+router.put('/', checkTTL(), validateShortURL, handleIncreaseClick);
 
 export default router;
