@@ -1,5 +1,4 @@
 import checkTTL from './ttl';
-import hasLongURL from './long';
-import hasShortURL from './short';
+import { hasLongURL, hasShortURL } from './existence';
 
 export { checkTTL, hasLongURL, hasShortURL };
