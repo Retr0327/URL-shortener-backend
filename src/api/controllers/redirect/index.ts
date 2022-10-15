@@ -5,10 +5,20 @@ const handleRedirectURL: Middleware = async (ctx) => {
   const { shortURL } = ctx.params;
   const longURLResult = await prisma.shortUrls.findUnique({
     where: { shortURL },
-    select: { fullURL: true },
+    select: { fullURL: true, expire: true },
   });
 
   if (longURLResult === null) {
+    ctx.status = 200;
+    ctx.body = { status: 'success', msg: 'expired' };
+    return;
+  }
+
+  const expire = new Date(longURLResult.expire);
+  const now = new Date();
+
+  if (now > expire) {
+    await prisma.shortUrls.delete({ where: { fullURL: longURLResult.fullURL } });
     ctx.status = 200;
     ctx.body = { status: 'success', msg: 'expired' };
     return;

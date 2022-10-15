@@ -14,6 +14,16 @@ const checkTTL = (): Middleware => async (ctx, next) => {
     return;
   }
 
+  const now = new Date();
+  const expire = new Date(result.expire);
+
+  if (now > expire) {
+    await prisma.shortUrls.delete({ where: { shortURL: result.shortURL } });
+    ctx.status = 200;
+    ctx.body = { status: 'success', msg: 'expired' };
+    return;
+  }
+
   await next();
 };
 
