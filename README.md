@@ -39,13 +39,13 @@ Hence, the project strucutre should look like this:
 
 ```
 URL-shortener-frontend\        
- |-- public\              # Some static files
- |-- src\                 # Source files
+ |-- public\              # some static files
+ |-- src\                 # source files
  |-- ...
 URL-shortener-backend\
- |-- deployment\          # Deployment folder
- |-- src\                 # Source files
- |-- test\                # Automated tests
+ |-- deployment\          # deployment folder
+ |-- src\                 # source files
+ |-- test\                # automated tests
  |-- ...
 ```
 
@@ -55,13 +55,13 @@ Install docker, and use the following command to run:
 > Remember to run the command in the backend folder!
  
 ```bash
-docker compose up 
+docker-compose up 
 ```
 
 ## **Performance (with pm2)**
 This project is managed by [pm2](https://pm2.keymetrics.io/), which helps manage Node apps and restarts them once they failed, and this project is set to the cluster mode, allowing the application to be scaled across all CPUs available. 
 
-We can run a load test on the localhost (once we run the `docker compose up` command):
+We can run a load test on the localhost (once we run the `docker-compose up` command):
 
 ```bash 
 loadtest -P '{"url":"https://github.com/Retr0327", "expireDate":"2022-04-29T13:05:20.331Z"}' -n 10 -c 10000 http://localhost/
