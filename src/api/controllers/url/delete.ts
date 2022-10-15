@@ -1,8 +1,3 @@
-// import { removeCachedURL } from "@utils";
-// import { RouterContext } from "@koa/router";
-// import { PrismaClient } from "@prisma/client";
-
-// const { shortUrls } = new PrismaClient();
 import { URL } from 'types';
 import { Middleware } from 'koa';
 import { prisma } from '@models';
