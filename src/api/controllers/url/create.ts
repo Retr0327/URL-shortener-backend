@@ -3,7 +3,7 @@ import { Middleware } from 'koa';
 import { prisma } from '@models';
 import makeShortURL from '@utils/url';
 import { hsetURL } from '@utils/redis';
-import getExpireTime from '@utils/expire';
+import getExpireTime from '@utils/expiry';
 
 type Request = Pick<URL, 'url' | 'expireDate'>;
 
