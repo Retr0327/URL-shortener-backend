@@ -11,6 +11,23 @@ const handleGetAllShortURLs: Middleware = async (ctx) => {
       return;
     }
 
+    const removedList: string[] = [];
+
+    data.forEach((value) => {
+      const now = new Date();
+      const expire = new Date(value.expire);
+
+      if (now > expire) {
+        removedList.push(value.shortURL);
+      }
+    });
+
+    await prisma.shortUrls.deleteMany({
+      where: {
+        shortURL: { in: removedList },
+      },
+    });
+
     ctx.status = 200;
     ctx.body = { status: 'success', data };
   } catch (error) {
