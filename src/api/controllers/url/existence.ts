@@ -10,17 +10,27 @@ const handleCheckURL: Middleware = async (ctx) => {
 
     const result = await prisma.shortUrls.findUnique({
       where: { fullURL: url },
-      select: { id: true, shortURL: true },
+      select: { id: true, shortURL: true, expire: true },
     });
 
-    if (result !== null) {
+    if (result === null) {
       ctx.status = 200;
-      ctx.body = { status: 'success', data: { exist: true } };
+      ctx.body = { status: 'success', data: { exist: false } };
+      return;
+    }
+
+    const expire = new Date(result.expire);
+    const now = new Date();
+
+    if (now > expire) {
+      await prisma.shortUrls.delete({ where: { shortURL: result.shortURL } });
+      ctx.status = 200;
+      ctx.body = { status: 'success', data: { exist: false } };
       return;
     }
 
     ctx.status = 200;
-    ctx.body = { status: 'success', data: { exist: false } };
+    ctx.body = { status: 'success', data: { exist: true } };
   } catch (error) {
     ctx.status = 500;
     ctx.body = { status: 'failed', msg: 'internal server error' };
