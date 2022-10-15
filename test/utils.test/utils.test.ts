@@ -1,5 +1,5 @@
 import makeShortURL from '@utils/url';
-import getExpireTime from '@utils/expire';
+import getExpireTime from '@utils/expiry';
 import { getRedisKey } from '@utils/redis';
 
 describe('Test utils', () => {
