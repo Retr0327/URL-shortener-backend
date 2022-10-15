@@ -1,4 +1,5 @@
 import {
+  handleCheckURL,
   handleCreateShortURL,
   handleGetAllShortURLs,
   handleDeleteShortURL,
@@ -11,6 +12,8 @@ import { validateCreateURL, validateShortURL } from '@validations/url';
 const router = new Router({ prefix: '/url' });
 
 router.post('/', validateCreateURL, hasLongURL(), handleCreateShortURL);
+
+router.post('/existence', handleCheckURL);
 
 router.get('/', handleGetAllShortURLs);
 
