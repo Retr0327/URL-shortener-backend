@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+    restart: always
+    command: bash -c "export DATABASE_URL=\"postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@$$(dig +short db):5432/short_url?schema=public&connection_limit=5&pool_size=200\" && pnpm prisma migrate deploy && pnpm pm2-runtime ./deployment/ecosystem.config.json"
+
+  client:
+    stdin_open: true
+    build: ../url-shortener-frontend
+    links:
+      - api
+    depends_on:
+      - api
+    command: bash -c "pnpm pm2-runtime ./deployment/ecosystem.config.json"
+
+  db:
+    image: postgres:14
+    restart: always
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:?err}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?err}
+    volumes:
+      - ../pgdata:/var/lib/postgresql/data
+      - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+    command: postgres -c stats_temp_directory=/tmp
+    healthcheck:
+      test: 'pg_isready -U $POSTGRES_USER'
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - 6378:6379
+    healthcheck:
+      test: 'redis-cli ping'
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  nginx:
+    image: 'nginx:stable'
+    depends_on:
+      - api
+    links:
+      - api
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - './deployment/nginx.conf:/etc/nginx/nginx.conf'
