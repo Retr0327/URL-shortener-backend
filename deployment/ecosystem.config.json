@@ -1,34 +1,37 @@
 {
   "apps": [
     {
-      "script": "dist/src/server.js",
+      "script": "pnpm",
+      "args": "start:pm2",
       "cwd": "/app/",
-      "watch": true,
-      "name": "api-worker-0",
-      "instances": "2",
-      "exec_mode": "cluster",
-      "max_memory_restart": "2G",
-      "env": { "NODE_ENV": "production", "PORT": 3000 }
+      "name": "short-url-backend-worker-0",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 6666
+      },
+      "max_memory_restart": "2G"
     },
     {
-      "script": "dist/src/server.js",
+      "script": "pnpm",
+      "args": "start:pm2",
       "cwd": "/app/",
-      "watch": true,
-      "name": "api-worker-1",
-      "instances": "2",
-      "exec_mode": "cluster",
-      "max_memory_restart": "2G",
-      "env": { "NODE_ENV": "production", "PORT": 6666 }
+      "name": "short-url-backend-worker-1",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 6688
+      },
+      "max_memory_restart": "2G"
     },
     {
-      "script": "dist/src/server.js",
+      "script": "pnpm",
+      "args": "start:pm2",
       "cwd": "/app/",
-      "watch": true,
-      "name": "api-worker-2",
-      "instances": "2",
-      "exec_mode": "cluster",
-      "max_memory_restart": "2G",
-      "env": { "NODE_ENV": "production", "PORT": 6688 }
+      "name": "short-url-backend-worker-2",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 8866
+      },
+      "max_memory_restart": "2G"
     }
   ]
 }
