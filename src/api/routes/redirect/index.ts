@@ -4,6 +4,6 @@ import handleRedirectURL from '@controllers/redirect';
 
 const router = new Router();
 
-router.get('/:shortURL', hasShortURL, handleRedirectURL);
+router.get('/:shortURL', hasShortURL(), handleRedirectURL);
 
 export default router;
