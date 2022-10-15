@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+    command: bash -c "export DATABASE_URL=\"postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@$$(dig +short db):5432/short_url?schema=public&connection_limit=5&pool_size=200\" && pnpm prisma migrate deploy && pnpm run dev"
+
+  client:
+    stdin_open: true
+    build:
+      context: ../url-shortener-frontend
+      dockerfile: Dockerfile.dev
+    expose:
+      - 3001
+    ports:
+      - 3001:3000
+    volumes:
+      - ../url-shortener-frontend:/app
+      - /app/node_modules
+    links:
+      - api
+    depends_on:
+      - api
+    command: bash -c "pnpm run dev"
+
+  db:
+    image: postgres:14
+    restart: always
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:?err}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?err}
+    volumes:
+      - ../pgdata:/var/lib/postgresql/data # mnt/postgres
+      - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+    command: postgres -c stats_temp_directory=/tmp
+    healthcheck:
+      test: 'pg_isready -U $POSTGRES_USER'
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - 6378:6379
+    healthcheck:
+      test: 'redis-cli ping'
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
